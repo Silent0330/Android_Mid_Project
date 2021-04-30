@@ -125,9 +125,6 @@ public class MainActivity extends AppCompatActivity {
             items = new Vector<Item>();
             player = new Player(this);
             bricks = new Brick[brickRows][brickCols];
-            gameLevel = 0;
-            downCount = 0;
-            score = 0;
             Initial();
         }
 
@@ -141,6 +138,9 @@ public class MainActivity extends AppCompatActivity {
             life = 3;
             ballSizeEffect= EFFECT_NORMALBALL;
             ballSizeEffectTime = 0;
+            gameLevel = 0;
+            downCount = 0;
+            score = 0;
             if(gameMode == MODE_NORMAL) {
                 for (int i = 0; i < brickRows; i++) {
                     for (int j = 0; j < brickCols; j++) {
@@ -432,7 +432,7 @@ public class MainActivity extends AppCompatActivity {
             r = game.tileHeight/2;
             vx = 0;
             vy = 0;
-            speed = 40;
+            speed = 30;
             dx = px;
             dy = py;
             damage = 1;
