@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     DrawView drawView;
     Game game;
     boolean gameStart;
+    
+    SharedPreferences sharedPreferences;
 
     public SoundPool soundPool;
     private AudioManager audioManager;
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         gameStart = false;
         drawView = new DrawView(this);
         setContentView(drawView);
+        
+        sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
 
         audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         float currentVolumeIndex = (float) audioManager.getStreamVolume(streamType);
@@ -93,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         int gameState, gameMode;
         int gameLevel, downCount, bottomRow;
         int ballSizeEffectTime, ballSizeEffect;
-        int score;
+        int score, maxScore;
         //game states
         static final int STATE_PLAYING = 0;
         static final int STATE_PAUSE = 1;
@@ -109,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         Game(int game_mode) {
+            maxScore = sharedPreferences.getInt("MaxScore", 0);
             gameMode = game_mode;
             cols = 10; rows = 24;
             brickCols = 10;
@@ -279,6 +284,11 @@ public class MainActivity extends AppCompatActivity {
                     balls.remove(i);
                     i--;
                 }
+            }
+            
+            if(score > maxScore) {
+                maxScore = score;
+                sharedPreferences.edit().putInt("MaxScore", maxScore).apply();
             }
 
             for(int i = 0; i < items.size(); i++)
@@ -1036,6 +1046,9 @@ public class MainActivity extends AppCompatActivity {
                 paint.setTextSize(60);
                 paint.setTextAlign(Paint.Align.LEFT);
                 canvas.drawText("score:" + game.score,500, 50 - paint.getFontMetrics().ascent / 2, paint);
+                paint.setTextSize(60);
+                paint.setTextAlign(Paint.Align.LEFT);
+                canvas.drawText("max:" + game.maxScore,750, 50 - paint.getFontMetrics().ascent / 2, paint);
 
                 //effect
                 if(game.ballSizeEffect == Game.EFFECT_SMALLBALL) {
