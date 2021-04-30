@@ -1039,13 +1039,13 @@ public class MainActivity extends AppCompatActivity {
                     //level
                     paint.setTextSize(60);
                     paint.setTextAlign(Paint.Align.LEFT);
-                    canvas.drawText("lv:" + game.gameLevel,350, 50 - paint.getFontMetrics().ascent / 2, paint);
+                    canvas.drawText("lv:" + game.gameLevel,320, 50 - paint.getFontMetrics().ascent / 2, paint);
                 }
 
                 //score
                 paint.setTextSize(60);
                 paint.setTextAlign(Paint.Align.LEFT);
-                canvas.drawText("score:" + game.score,500, 50 - paint.getFontMetrics().ascent / 2, paint);
+                canvas.drawText("score:" + game.score,450, 50 - paint.getFontMetrics().ascent / 2, paint);
                 paint.setTextSize(60);
                 paint.setTextAlign(Paint.Align.LEFT);
                 canvas.drawText("max:" + game.maxScore,750, 50 - paint.getFontMetrics().ascent / 2, paint);
